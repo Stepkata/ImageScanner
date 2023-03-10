@@ -26,7 +26,8 @@ def order_points(pts):
 
 
 def four_point_transform(image, pts):
-    (tl, tr, br, bl) = order_points(pts) #obtain consistent order of the points
+    rect = order_points(pts)
+    (tl, tr, br, bl) = rect #obtain consistent order of the points
 
     """compute the width of new image, which will be the 
     maximum distance between bottom-right and bottom-left
@@ -44,11 +45,11 @@ def four_point_transform(image, pts):
 
     """construct the set of destination points to obtain top-down view 
     of the image, specifying points in order just like in @order_points()"""
-    dst = np.array(
+    dst = np.array([
         [0, 0],
         [newWidth -1, 0],
         [newWidth -1, newHeight-1],
-        [0, newHeight-1],
+        [0, newHeight-1]],
         dtype="float32"
     )
 
